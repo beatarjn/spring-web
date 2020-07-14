@@ -1,10 +1,7 @@
 package workshop.springb.starter.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import workshop.springb.starter.model.Hobbit;
 
@@ -12,8 +9,8 @@ import workshop.springb.starter.model.Hobbit;
     TODO 2
     Zwróć uwagę, że klasa ma adnotację @Controller
     Domyślne zachowanie - metody kontrolera będą przekierowywały na widok html.
-    Jeśli chcemy, żeby metody kontrolera nie przekierowywały na widko, a zwracały String, obiekt w postaci JSON itp.
-    Dodajemy adnotaccję @ResponseBody
+    Jeśli chcemy, żeby metody kontrolera nie przekierowywały na widok, a zwracały String, obiekt w postaci JSON itp.
+    Dodajemy adnotację @ResponseBody
 
     Wcześniej nie robilismy tego, bo zamiast @Controller używaliśmy @RestController.
     @RestController = @Controller + @ResponseBody
@@ -35,27 +32,6 @@ public class HobbitController {
         /hobbit-as-response-entity zwraca ResponseEntity z Hobbit'em i własnym nagłówkiem (dowolny)
 
      */
-    @GetMapping("/hobbit-as-string")
-    @ResponseBody
-    public String returnString() {
-        return hobbit.toString();
-    }
-
-    @GetMapping("/hobbit-as-object")
-    @ResponseBody
-    public Hobbit returnObject() {
-        return hobbit;
-    }
-
-
-    @GetMapping("/hobbit-as-response-entity")
-    @ResponseBody
-    public ResponseEntity<Hobbit> returnResponseEntity() {
-        return ResponseEntity.ok()
-                .header(CUSTOM_HEADER, CUSTOM_HEADERS_VALUE)
-                .body(hobbit);
-
-    }
 
     /*
         TODO 3
@@ -76,7 +52,7 @@ public class HobbitController {
     ____________________________________________________________________________________________________________________
 
     TODO 1 W tym module przećwiczymy 4 sposoby, na zwracanie danych z kontrolera:
-     typ prosty (String),
+     String,
      Obiekt,
      ResponseEntity (Hobbit i własne dane w nagłówku HTTP),
      przekierowanie na widok HTML  - jest już zaimplementowane.
