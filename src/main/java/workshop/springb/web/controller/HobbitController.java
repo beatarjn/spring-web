@@ -1,8 +1,6 @@
 package workshop.springb.web.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import workshop.springb.web.model.Hobbit;
 
 @RestController
@@ -11,6 +9,24 @@ public class HobbitController {
     @GetMapping("/hobbits-path-varialble/{name}/{lastName}")
     public Hobbit pathVariableExample(@PathVariable String name, @PathVariable String lastName) {
         return new Hobbit(name.toUpperCase(), lastName.toUpperCase());
+    }
+
+    @GetMapping("/hobbits-arguments")
+    public Hobbit requestParamExample(@RequestParam String name, @RequestParam String lastName) {
+        return new Hobbit(name.toUpperCase(), lastName.toUpperCase());
+    }
+
+    @PostMapping("/hobbits-json-object")
+    public Hobbit requestBodyExample(@RequestBody Hobbit hobbit) {
+        return new Hobbit(hobbit.getName().toUpperCase(), hobbit.getLastName().toUpperCase());
+    }
+
+    @GetMapping("/hobbits-matrix/{hobbit}")
+    public Hobbit matrixVariableExample(@MatrixVariable String name, @MatrixVariable String lastName) {
+        return new Hobbit(name.toUpperCase(), lastName.toUpperCase());
+
+//    public Hobbit matrixVariableExample(@MatrixVariable Map<String, String> matrixVars) {
+//        return new Hobbit(matrixVars.get("name").toUpperCase(), matrixVars.get("lastName").toUpperCase());
     }
 
 }
