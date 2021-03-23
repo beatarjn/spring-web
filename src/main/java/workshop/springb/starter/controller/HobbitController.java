@@ -1,7 +1,11 @@
 package workshop.springb.starter.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import workshop.springb.starter.model.Hobbit;
 
@@ -32,6 +36,24 @@ public class HobbitController {
         /hobbit-as-response-entity zwraca ResponseEntity z Hobbit'em i własnym nagłówkiem (dowolny)
 
      */
+
+    @GetMapping("/hobbit-as-string")
+    @ResponseBody
+    public String returnString() {
+        return hobbit.toString();
+    }
+
+    @GetMapping("/hobbit-as-object")
+    @ResponseBody
+    public Hobbit returnObject() {
+        return hobbit;
+    }
+
+    @GetMapping("/hobbit-as-response-entity")
+    @ResponseBody
+    public ResponseEntity<Hobbit> returnResponseEntity() {
+        return ResponseEntity.ok().header(CUSTOM_HEADER, CUSTOM_HEADERS_VALUE).body(hobbit);
+    }
 
     /*
         TODO 3
