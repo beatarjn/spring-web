@@ -39,8 +39,8 @@ class GreetControllerTest {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/validate-hobbit")
-                .contentType("application/json")
-                .content(MAPPER.writeValueAsString(new Hobbit("Bilbo", false)))
+                        .contentType("application/json")
+                        .content(MAPPER.writeValueAsString(new Hobbit("Bilbo", false)))
         )
                 .andExpect(status().isOk());
     }
@@ -49,4 +49,26 @@ class GreetControllerTest {
         TODO 6 po zapoznaniu się z zaimplementowaną walidacją, utwórz analogiczne rozwiązanie,
          z walidacją Saruman'a.
      */
+
+    @Test
+    void validateHobbitSarumanShouldReturn400() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/validate-hobbit")
+                .contentType("application/json")
+                .content(MAPPER.writeValueAsString(new Hobbit("Saruman", false)))
+        )
+                .andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    void validateHobbitNotSarumanShouldReturn200() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/validate-hobbit")
+                        .contentType("application/json")
+                        .content(MAPPER.writeValueAsString(new Hobbit("Bilbo", false)))
+        )
+                .andExpect(status().isOk());
+    }
 }
